@@ -9,7 +9,7 @@
         $username = $_POST['username'];
 
         include('includes/db_connect.php');
-        $ret = pg_query($db, "select * from users where username='".$username."';");
+        $ret = pg_query_params($db, "select * from users where username=$1;", array($username));
 
         if (pg_num_rows($ret) === 1) {
             $success = true;
